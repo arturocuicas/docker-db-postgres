@@ -6,18 +6,12 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-    logging:
-      options:
-        max-size: 10m
-        max-file: "3"
     ports:
       - '5432:5432'
     volumes:
-      - db:/var/lib/postgresql/data
-        # copy the sql script to create tables
+      - db-postgres:/var/lib/postgresql/data
       - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
-        # copy the sql script to fill tables
       - ./sql/fill_tables.sql:/docker-entrypoint-initdb.d/fill_tables.sql
 volumes:
-  db:
+  db-postgres:
     driver: local

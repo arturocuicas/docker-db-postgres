@@ -1,29 +1,31 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 CREATE TABLE "user" (
-  "uuid" uuid PRIMARY KEY NOT NULL,
+  "uuid" uuid PRIMARY KEY NOT NULL DEFAULT uuid_generate_v4 (),
   "full_name" varchar NOT NULL,
   "created_at" timestamp DEFAULT (now())
 );
 
 CREATE TABLE "budget" (
-  "uuid" uuid PRIMARY KEY NOT NULL,
+  "uuid" uuid PRIMARY KEY NOT NULL DEFAULT uuid_generate_v4 (),
   "user_uuid" uuid NOT NULL,
   "name" varchar,
   "created_at" timestamp DEFAULT (now())
 );
 
 CREATE TABLE "category" (
-  "uuid" uuid PRIMARY KEY NOT NULL,
+  "uuid" uuid PRIMARY KEY NOT NULL DEFAULT uuid_generate_v4 (),
   "budget_uuid" uuid NOT NULL,
   "name" varchar NOT NULL,
   "created_at" timestamp DEFAULT (now())
 );
 
 CREATE TABLE "entry" (
-  "uuid" uuid PRIMARY KEY NOT NULL,
+  "uuid" uuid PRIMARY KEY NOT NULL DEFAULT uuid_generate_v4 (),
   "user_uuid" uuid NOT NULL,
   "category_uuid" uuid NOT NULL,
   "description" text,
-  "amount" "decimal(15, 3)" DEFAULT (0.000),
+  "amount" numeric(15, 3) DEFAULT (0.000),
   "created_at" timestamp DEFAULT (now())
 );
 

@@ -1,2 +1,4 @@
-.DS_Store
-postgres-data/*
+.idea/
+idea/
+
+sql/data/*
